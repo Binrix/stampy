@@ -1,0 +1,15 @@
+{
+    "version": "0.0.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "launch backend",
+            "program": "./stampy-api/dist/main.js",
+            "preLaunchTask": "build-api",
+            "outFiles": [
+                "../stampy-api/dist/**/*.js",
+            ] 
+        }
+    ]
+}

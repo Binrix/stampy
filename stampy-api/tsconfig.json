@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "baseUrl": ".",
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "target": "es2017",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "lib": [
+            "es2020",
+            "dom"
+        ],
+        "importHelpers": true,
+        "outDir": "./dist",
+        "esModuleInterop": true,
+    },
+    "include": [
+        "./**/*.ts",
+        "./**/*.d.ts"
+    ],
+    "exclude": [
+        "typings/*",
+        "node_modules"
+    ]
+}
