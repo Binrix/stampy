@@ -5,19 +5,19 @@ export class Db {
     public static knex: Knex<any, unknown[]>;
 
     static initDb() {
-        this.knex.schema.createTableIfNotExists("project", (table: Knex.CreateTableBuilder) => {
-            table.increments();
-            table.string('title');
-        }).then(() => {
-            this.knex<Project>("project").insert([
-                {title: 'Taschenrechner'},
-                {title: 'Todo-App'}
-            ]).catch((error) => {
-                console.error(error);
-            });
-        }).catch((error) => {
-            console.error(error);
-        });
+        // this.knex.schema.createTableIfNotExists("project", (table: Knex.CreateTableBuilder) => {
+        //     table.increments();
+        //     table.string('title');
+        // }).then(() => {
+        //     this.knex<Project>("project").insert([
+        //         {title: 'Taschenrechner'},
+        //         {title: 'Todo-App'}
+        //     ]).catch((error) => {
+        //         console.error(error);
+        //     });
+        // }).catch((error) => {
+        //     console.error(error);
+        // });
     }
  
     static connect() {
