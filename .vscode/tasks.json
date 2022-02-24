@@ -19,6 +19,22 @@
                 }
             },
             "group": "build"
+        },
+        {
+          "label": "build-ui",
+          "type": "npm",
+          "script": "build",
+          "path": "./stampy-ui/",
+          "problemMatcher": [],
+          "group": "build",
+          "detail": "ng build"
+        },
+        {
+          "label": "build",
+          "dependsOn": [
+            "build-ui",
+            "build-api"
+          ]
         }
     ]
 }

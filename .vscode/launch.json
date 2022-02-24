@@ -4,9 +4,9 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "launch backend",
+            "name": "launch-project",
             "program": "./stampy-api/dist/main.js",
-            "preLaunchTask": "build-api",
+            "preLaunchTask": "build",
             "outFiles": [
                 "../stampy-api/dist/**/*.js",
             ] 
