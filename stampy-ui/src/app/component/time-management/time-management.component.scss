@@ -1,0 +1,41 @@
+h2 {
+    cursor: pointer;
+}
+
+.project-info-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.working-block {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    margin-right: 20px;
+}
+
+.working-block-container {
+    height: 25em;
+    width: 500px;
+    overflow-y: scroll;
+    display: inline-block;
+}
+
+.lower-navigation-buttons {
+    display: flex;
+    margin-top: 25px;
+    width: 500px;
+    justify-content: space-between;
+}
+
+.lower-navigation-buttons > button {
+    margin: 0;
+}
+
+.week-average {
+    background-color: #afff00;
+    padding: 10px;
+    border-radius: 10px;
+}

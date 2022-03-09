@@ -1,1 +1,49 @@
-<p>time-management works!</p>
+<h2 (click)="goToProjectOverview()">...</h2>
+<h1>{{ project.title }}</h1>
+<div class="project-info-container">
+    <div class="left-container">
+        <button (click)="startWorkingBlock()">Start work</button>
+        <button (click)="stopWorkingBlock()">Stop work</button>
+        <div *ngIf="totalWorkingTime != null">
+            <h2>Total working time</h2>
+            <p>{{ totalWorkingTime }}</p>
+        </div>
+        <div  class="working-block-container">
+            <div *ngIf="workingBlocks.length <= 0" class="working-block">
+                <p>No working blocks</p>
+            </div>
+            <div *ngFor="let workingblock of workingBlocks" class="working-block">
+                <p>{{ workingblock.starttime | date:"dd.MM.y HH:mm:ss" }}</p>
+                <p>{{ workingblock.endtime | date:"dd.MM.y HH:mm:ss" }}</p>
+                <p>{{ millisecondsToHours(workingblock.workingtime) }}</p>
+            </div>
+        </div>
+        <div class="lower-navigation-buttons">
+            <button (click)="getWorkingBlocksOfPreviousWeek()">Previous week</button>
+            <p>{{ startWeek | date:"dd.MM.y" }} to {{ endWeek | date:"dd.MM.y" }}</p>
+            <button (click)="getWorkingBlocksOfNextWeek()">Next week</button>
+        </div>
+    </div>
+    <div class="right-container">
+        <table>
+            <tr>
+                <th colspan="2" >{{ startMonth | date:"dd.MM" }}</th>
+                <th colspan="2" >{{ endMonth | date:"dd.MM" }}</th>
+            </tr>
+            <tr>
+                <td>
+                    <p class="week-average">45.2</p>
+                </td>
+                <td>
+                    <p class="week-average">45.2</p>
+                </td>
+                <td>
+                    <p class="week-average">45.2</p>
+                </td>
+                <td>
+                    <p class="week-average">45.2</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

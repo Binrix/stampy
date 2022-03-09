@@ -3,3 +3,17 @@ body {
     background-color: #e6e6e6;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+button {
+    background-color: white;
+    border: none;
+    padding: 8px 30px;
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4798ee;
+    color: white;
+}

@@ -11,6 +11,15 @@ export class ProjectService {
     constructor(private readonly httpClient: HttpClient) { }
   
     public getProjects(): Observable<Project[]> {
-        return this.httpClient.get<Project[]>('http://localhost:3000/api/project');
+        return this.httpClient.get<Project[]>('/api/project');
     }
+
+    public getOneById(id: number): Observable<Project> {
+        return this.httpClient.get<Project>(`/api/project/${id}`);
+    }
+
+    public createProject(projectName: string): Observable<Project> {
+        return this.httpClient.post<Project>(`/api/project/create`, { name: projectName });
+    }
+
 }

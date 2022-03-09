@@ -1,15 +1,35 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 0 auto;
+}
+
 .project {
     background-color: #fff;
-    width: 15%;
     text-align: center;
     margin-top: 20px;
     line-height: normal;
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
+    display: inline-block;
+    width: 225px;
+    margin-right: 20px;
 }
 
 .project:hover {
     background-color: #4798ee;
     color: white;
+}
+
+input {
+    border: none;
+    padding: 8px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+button {
+    width: 200px;
 }

@@ -1,4 +1,10 @@
 <h1>Projekte</h1>
-<div class="project" (click)="openTimeManagementForProject(project.id)" *ngFor="let project of projects">
-    <p>{{ project.title }}</p>
+<div class="container">
+    <div class="input-form">
+        <input #projectName placeholder="Project name" />
+        <button (click)="createProject(projectName)">Create project</button>
+    </div>
+    <div class="project" (click)="openTimeManagementForProject(project.id)" *ngFor="let project of projects">
+        <p>{{ project.title }}</p>
+    </div>
 </div>

@@ -18,4 +18,13 @@ services:
       - 5432
     restart: "no"
     environment:
-      - POSTGRES_PASSWORD=CHANGEME
+      - POSTGRES_PASSWORD=CHANGEME,
+      - POSTGRES_USER=jarvis,
+      - POSTGRES_DB=gdd,
+
+  stampy-api:
+    build: ./stampy-api
+    ports:
+      - "4000:3000"
+    expose:
+      - 4000

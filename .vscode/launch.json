@@ -6,10 +6,12 @@
             "request": "launch",
             "name": "launch-project",
             "program": "./stampy-api/dist/main.js",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "build",
             "outFiles": [
                 "../stampy-api/dist/**/*.js",
             ] 
-        }
+        },
     ]
 }

@@ -1,5 +1,4 @@
 import  knex, { Knex } from 'knex';
-import { Project } from './tables/project.table';
 
 export class Db {
     public static knex: Knex<any, unknown[]>;
@@ -25,7 +24,7 @@ export class Db {
             client: 'pg',
             version: '9.5',
             connection: {
-                host: 'localhost',
+                host: 'stampy-db',
                 port: 5432,
                 user: 'jarvis',
                 password: 'CHANGEME',

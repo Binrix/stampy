@@ -17,9 +17,23 @@ export class ProjectComponent implements OnInit {
   ) { }
 
   public openTimeManagementForProject(id: number): void {
-    console.log("Inside openTimeManagementForProject");
-    console.log(id);
-    this.router.navigate(['/time-management', id])
+    this.router.navigate(['/time-management', id]);
+  }
+
+  public createProject(projectInputField: HTMLInputElement) {
+    var projectName: string = projectInputField.value;
+    
+    if(projectName.length < 3) {
+      return;
+    }
+
+    this.projectService.createProject(projectName).subscribe((project: Project) => {
+      console.log(project);
+      
+      //this.projects.push(project);
+    });
+
+    projectInputField.value = "";
   }
 
   ngOnInit(): void {

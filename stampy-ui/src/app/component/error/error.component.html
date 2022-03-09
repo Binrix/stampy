@@ -1,0 +1,11 @@
+<div *ngIf="errorMessages.length > 0" class="error-container">
+    <div class="error" *ngFor="let error of errorMessages">
+        {{ error.message }}
+        <p *ngIf="error.quantity > 1" class="quantity">
+            {{ error.quantity }}
+        </p>
+        <span (click)="removeError(error.message)" class="material-icons-outlined">
+            close
+            </span>
+    </div>
+</div>
