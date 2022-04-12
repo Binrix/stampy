@@ -19,11 +19,11 @@ export class Server {
 
         this.registerController();
 
-        this.app.use(express.static(path.join(process.cwd(), '/stampy-ui')));
+        this.app.use(express.static(path.join(process.cwd(), '/stampy-ui/dist/stampy-ui'))); // /stampy-ui/dist/stampy-ui (local) | /stampy-ui (docker)
         this.app.use(express.urlencoded({ extended: true }));
 
         this.app.get('*', (req, res) => {
-            res.sendFile(path.join(process.cwd(), '/stampy-ui/index.html'));
+            res.sendFile(path.join(process.cwd(), '/stampy-ui/dist/stampy-ui/index.html')); // /stampy-ui/dist/stampy-ui/index.html | /stampy-ui/index.html (docker)
         });
 
         this.httpServer = http.createServer(this.app);

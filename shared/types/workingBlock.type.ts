@@ -3,5 +3,5 @@ export interface WorkingBlock {
     project_id: number;
     starttime: Date;
     endtime?: Date;
-    workingtime?: number;
+    workingtime: number;
 }

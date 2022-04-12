@@ -13,11 +13,26 @@ export class WorkingBlockController {
         this.router.post('/stop', this.stopWorkingBlock);
         this.router.get('/time/:id', this.getWorkingTime);
         this.router.get('/:id', this.getWorkingBlocks);
+        this.router.get('/open/:id', this.getOpenWorkingBlock)
         this.router.get('/:id/:startdate/:enddate', this.getWorkingBlocksFromWeek);
     }
 
+    private getOpenWorkingBlock(req: Request, res: Response): void {
+        Db.knex<WorkingBlock>('working_block')
+            .select()
+            .whereNull('endtime')
+            .andWhere({ projectid: Number.parseInt(req.params['id']) })
+            .then((result: WorkingBlock[]) => {
+                res.send(result[0]);
+            })
+            .catch((error) => {
+                console.error(error);
+                res.status(400);
+                res.send(`The working block for project id ${req.params['id']} could not be fetched`)
+            });
+    }
+
     private stopWorkingBlock(req: Request, res: Response): void {
-        console.log(req.body);
         Db.knex<WorkingBlock>('working_block')
             .whereNull('endtime')
             .andWhere({ projectid: Number.parseInt(req.body.id) })
@@ -32,8 +47,9 @@ export class WorkingBlockController {
                     Db.knex<WorkingBlock>('working_block')
                         .where({ id: affectedWorkingBlock.id })
                         .update({ workingtime: dateDiff })
-                        .then((updateResult: number) => {
-                            res.send({ affectedRow: updateResult});
+                        .returning('*')
+                        .then((updateResult: WorkingBlock[]) => {
+                            res.send(updateResult[0]);
                             return;
                         })
                         .catch((error) => {
@@ -97,8 +113,13 @@ export class WorkingBlockController {
 
                     Db.knex<WorkingBlock>('working_block')
                         .insert(workingBlock)
-                        .then((result) => {
-                            res.send(result);
+                        .returning('*')
+                        .then((result: WorkingBlock[]) => {
+                            if(result.length > 0) {
+                                res.send(result[0]);
+                            } else {
+                                
+                            }
                         })
                         .catch((error) => {
                             res.status(400);
