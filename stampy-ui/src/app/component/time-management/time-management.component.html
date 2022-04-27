@@ -2,11 +2,15 @@
 <h1>{{ project.title }}</h1>
 <div class="project-info-container">
     <div class="left-container">
-        <button (click)="startWorkingBlock()">Start work</button>
+        <button (click)="startWorkingBlock()" [disabled]="isWorking">Start work</button>
         <button (click)="stopWorkingBlock()">Stop work</button>
+        <div *ngIf="totalWorkingTimeOfWeek != null">
+            <h4>Total this week</h4>
+            <p>{{ totalWorkingTimeOfWeek }} hours</p>
+        </div>
         <div *ngIf="totalWorkingTime != null">
-            <h2>Total working time</h2>
-            <p>{{ totalWorkingTime }}</p>
+            <h4>Total this project</h4>
+            <p>{{ totalWorkingTime }} hours</p>  
         </div>
         <div  class="working-block-container">
             <div *ngIf="workingBlocks.length <= 0" class="working-block">
@@ -15,7 +19,7 @@
             <div *ngFor="let workingblock of workingBlocks" class="working-block">
                 <p>{{ workingblock.starttime | date:"dd.MM.y HH:mm:ss" }}</p>
                 <p>{{ workingblock.endtime | date:"dd.MM.y HH:mm:ss" }}</p>
-                <p>{{ millisecondsToHours(workingblock.workingtime) }}</p>
+                <p>{{ millisecondsToHoursString(workingblock.workingtime) }}</p>
             </div>
         </div>
         <div class="lower-navigation-buttons">

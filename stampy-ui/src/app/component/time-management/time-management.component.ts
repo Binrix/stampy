@@ -16,12 +16,14 @@ export class TimeManagementComponent implements OnInit {
     id: 0,
     title: ''
   };
+  public totalWorkingTimeOfWeek: string = '0';
   public totalWorkingTime: string = '0';
   public workingBlocks: WorkingBlock[] = [];
   public startWeek: Date = startOfWeek(new Date(), { weekStartsOn: 1 });
   public endWeek: Date = endOfWeek(new Date(), { weekStartsOn: 1 });
   public startMonth: Date = startOfMonth(new Date()); 
   public endMonth: Date = endOfMonth(new Date()); 
+  public isWorking: boolean = false;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -30,14 +32,15 @@ export class TimeManagementComponent implements OnInit {
     private readonly router: Router
   ) { }
 
-  public millisecondsToHours(milliseconds: number | undefined): string {
+  public millisecondsToHoursString(milliseconds: number | undefined): string {
     if(milliseconds === undefined) { return '0 hours'; }
     return `${(milliseconds / (1000 * 60 * 60)).toFixed(2)} hours` ;
   }
 
   public startWorkingBlock(): void {
-    this.workingBlockService.startWorkingBlock(this.project.id).subscribe((result) => {
-      console.log(result);
+    this.workingBlockService.startWorkingBlock(this.project.id).subscribe((result: WorkingBlock) => {
+      this.isWorking = true;
+      this.workingBlocks.push(result);
     }); 
   } 
 
@@ -46,8 +49,16 @@ export class TimeManagementComponent implements OnInit {
   }
 
   public stopWorkingBlock(): void {
-    this.workingBlockService.stopWorkingBlock(this.project.id).subscribe((result: number) => {
-      console.log(result);
+    this.workingBlockService.stopWorkingBlock(this.project.id).subscribe((result: WorkingBlock) => {
+      
+      for(var i = 0; i < this.workingBlocks.length; i++) {
+        if(this.workingBlocks[i].id == result.id) {
+          this.workingBlocks[i] = result;
+          break;
+        }
+      }
+
+      this.isWorking = false;
       this.getWorkingTime();
     });
   }
@@ -59,7 +70,7 @@ export class TimeManagementComponent implements OnInit {
   public getWorkingTime(): void {
     this.workingBlockService.getWorkingTime(this.project.id).subscribe((result: { sum: string; }[]) => {
       var sum: number = Number.parseInt(result[0].sum);
-      this.totalWorkingTime = this.millisecondsToHours(Number.isNaN(sum) === true ? 0 : sum);
+      this.totalWorkingTime = this.millisecondsToHoursString(Number.isNaN(sum) === true ? 0 : sum);
     });
   }
 
@@ -75,9 +86,21 @@ export class TimeManagementComponent implements OnInit {
     this.getWorkingBlocks();
   }
 
+  public getOpenWorkingBlock() {
+    this.workingBlockService.getOpenWorkingBlock(this.project.id).subscribe((openWorkingBlock) => {
+      this.isWorking = openWorkingBlock == undefined ? false : true;
+    })
+  }
+
   public getWorkingBlocks(): void {
     this.workingBlockService.getWorkingBlocks(this.project.id,  this.startWeek, this.endWeek).subscribe((result: WorkingBlock[]) => {
-      console.log(result);
+      var milliseconds: number = 0;
+      for(var i = 0; i < result.length; i++) {
+        console.log(result[i].workingtime);
+        milliseconds += +result[i].workingtime;
+      }
+
+      this.totalWorkingTimeOfWeek = this.millisecondsToHoursString(milliseconds);
       this.workingBlocks = result;
     });
   }
@@ -86,10 +109,9 @@ export class TimeManagementComponent implements OnInit {
     var idOfProject = this.route.snapshot.params['id'];
     this.projectService.getOneById(idOfProject).subscribe((project: Project) => {
       this.project = project;
-      console.log(this.startWeek);
-      console.log(this.endWeek);
       this.getWorkingTime();
       this.getWorkingBlocks();
+      this.getOpenWorkingBlock();
     });
 
   }

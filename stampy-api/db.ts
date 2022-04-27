@@ -24,7 +24,7 @@ export class Db {
             client: 'pg',
             version: '9.5',
             connection: {
-                host: 'stampy-db',
+                host: 'localhost', // stampy-db (docker) | localhost (local)
                 port: 5432,
                 user: 'jarvis',
                 password: 'CHANGEME',
