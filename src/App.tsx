@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { ProjectDetailView } from './projects/ProjectDetailView';
+import { ProjectView } from './projects/ProjectView';
+import { HashRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <HashRouter>
+        <nav>
+          <Link to="/projects">Projects</Link>
+        </nav>
+        <Routes>
+          <Route index path="/" element={<ProjectView />} />
+          <Route path="/projects" element={<ProjectView />} />
+          <Route path="/projects/project" element={<ProjectDetailView />} />
+        </Routes>
+      </HashRouter>
+    </>
   );
 }
 
