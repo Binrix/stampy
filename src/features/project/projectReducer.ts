@@ -16,7 +16,7 @@ function replaceProject(arr: IProject[], itemForReplacement: IProject) {
 }
 
 const reducer = (state = initialState, action: ProjectAction): ProjectState => {
-    switch(action.type) {
+    switch (action.type) {
         case actionTypes.ADD_PROJECT:
             return {
                 ...state,
@@ -24,14 +24,14 @@ const reducer = (state = initialState, action: ProjectAction): ProjectState => {
             };
         case actionTypes.TOGGLE_TIMER:
             let index = state.projects.findIndex(p => p.id == action.project.id);
-            if(index != undefined)
+            if (index != undefined)
                 state.projects[index] = action.project;
 
             return {
                 ...state,
                 projects: state.projects
             }
-        }
+    }
 
     return state;
 }

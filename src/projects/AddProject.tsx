@@ -11,8 +11,8 @@ export const AddProject: FC<Props> = ({ saveProject }) => {
     const handleProjectData = (e: FormEvent<HTMLInputElement>) => {
         setProject({
             ...project,
-            id: project!.id,
-            timeStamps: project!.timeStamps,
+            id: project ? project!.id : 0,
+            timeStamps: [],
             name: e.currentTarget.value
         });
     };

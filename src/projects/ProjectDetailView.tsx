@@ -31,14 +31,17 @@ export const ProjectDetailView: FC = () => {
     return (
         <div className='Container'>
             <div className="Project">
-                <h2>{ projectToDetail!.name }</h2>
+                <h2>{projectToDetail!.name}</h2>
                 <button onClick={toggleTimerFnc}>Start timer</button>
             </div>
             <div className='Timestamps'>
                 <h2>Timestamps</h2>
-                { projectToDetail!.timeStamps.map(timeStamp => 
-                    <p>{ dayjs(timeStamp).format("DD.MM.YYYY HH:mm:ss") }</p>
-                )}    
+                {projectToDetail!.timeStamps.length <= 0 &&
+                    <p>No timestamps</p>
+                }
+                {projectToDetail!.timeStamps.map(timeStamp =>
+                    <p>{dayjs(timeStamp).format("DD.MM.YYYY HH:mm:ss")}</p>
+                )}
             </div>
         </div>
     );
